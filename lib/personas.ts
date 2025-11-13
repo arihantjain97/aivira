@@ -1,26 +1,32 @@
 export const personas = {
   SME: {
-    hero: 'Instant grant matches tailored to your business.',
+    name: 'Business',
+    hero: 'Get the funding, insights, and partners you need to grow your business confidently.',
     bullets: [
-      '2-minute Eligibility Checker (PSG / EDG / MRA)',
-      'AI-generated proposal drafts',
-      'Real-time approval tracking & reminders',
+      'Instant AI-powered grant eligibility (PSG / EDG / MRA)',
+      'ROI-focused project planning & scoped requirements',
+      'Compliant, evidence-backed proposal drafts',
     ],
+    cta: 'See full business workflow →',
   },
   Consultant: {
-    hero: 'Convert warm leads into funded projects—automatically.',
+    name: 'Consultant',
+    hero: 'Turn clear, qualified business needs into funded projects — powered by SmartLead.',
     bullets: [
-      'Live feed of WARM / HOT SME leads',
-      'Collaborative proposal workspace',
-      'Compliance dashboard & submission tracker',
+      'AI-qualified business leads',
+      'Clear requirements & collaboration-ready workspaces',
+      'Auto-generated BI docs, market research & indicative drafts',
     ],
+    cta: 'See full Consultant workflow →',
   },
   Vendor: {
-    hero: 'Sell PSG-ready solutions to pre-qualified buyers.',
+    name: 'Vendor',
+    hero: 'Get matched to businesses who actually need your solution — with grant-ready alignment.',
     bullets: [
-      'Product listing with grant-aligned docs',
-      'Quote Builder & availability calendar',
-      'Trust-score analytics for repeat business',
+      'AI-matched business buyers based on need, scope & budget',
+      'Grant-aligned product listing & documentation',
+      'Quote Builder & availability integration',
     ],
+    cta: 'See full Vendor workflow →',
   },
 };

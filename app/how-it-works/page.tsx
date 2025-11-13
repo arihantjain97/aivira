@@ -25,6 +25,7 @@ import { personas } from '@/lib/personas';
 
 const personaConfig = {
   SME: {
+    label: 'Business',
     icon: Building2,
     color: 'bg-blue-500',
     gradient: 'from-blue-500 to-blue-600',
@@ -66,6 +67,7 @@ const personaConfig = {
     ]
   },
   Consultant: {
+    label: 'Consultant',
     icon: Users,
     color: 'bg-green-500',
     gradient: 'from-green-500 to-green-600',
@@ -79,7 +81,7 @@ const personaConfig = {
       {
         step: 1,
         title: 'Lead Intelligence',
-        description: 'Access warm SME leads actively seeking grant funding',
+        description: 'Access warm business leads actively seeking grant funding',
         icon: Target,
         details: ['Pre-qualified prospects', 'Grant readiness scores', 'Contact information', 'Funding requirements']
       },
@@ -107,6 +109,7 @@ const personaConfig = {
     ]
   },
   Vendor: {
+    label: 'Vendor',
     icon: ShoppingCart,
     color: 'bg-purple-500',
     gradient: 'from-purple-500 to-purple-600',
@@ -127,7 +130,7 @@ const personaConfig = {
       {
         step: 2,
         title: 'Smart Matching',
-        description: 'Connect with SMEs seeking your specific solutions',
+        description: 'Connect with businesses seeking your specific solutions',
         icon: Target,
         details: ['Buyer-seller matching', 'Requirements analysis', 'Budget compatibility', 'Timeline alignment']
       },
@@ -183,7 +186,7 @@ export default function HowItWorks() {
               How Aivira Works for You
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Discover how our AI-powered platform transforms grant applications for SMEs, consultants, and vendors across Singapore.
+              Discover how our AI-powered platform transforms grant applications for businesses, consultants, and vendors across Singapore.
             </p>
           </motion.div>
         </div>
@@ -196,6 +199,7 @@ export default function HowItWorks() {
             <TabsList className="grid w-full grid-cols-3 mb-12 h-16">
               {Object.entries(personaConfig).map(([key, config]) => {
                 const IconComponent = config.icon;
+                const displayLabel = config.label ?? key;
                 return (
                   <TabsTrigger 
                     key={key} 
@@ -203,13 +207,15 @@ export default function HowItWorks() {
                     className="flex items-center gap-2 text-base font-medium h-full"
                   >
                     <IconComponent className="w-5 h-5" />
-                    {key}
+                    {displayLabel}
                   </TabsTrigger>
                 );
               })}
             </TabsList>
 
-            {Object.entries(personaConfig).map(([key, config]) => (
+            {Object.entries(personaConfig).map(([key, config]) => {
+              const displayLabel = config.label ?? key;
+              return (
               <TabsContent key={key} value={key} className="mt-0">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -224,7 +230,7 @@ export default function HowItWorks() {
                           <config.icon className="w-8 h-8" />
                         </div>
                         <div>
-                          <h2 className="text-3xl font-bold">{key}</h2>
+                          <h2 className="text-3xl font-bold">{displayLabel}</h2>
                           <p className="text-muted-foreground">User Journey</p>
                         </div>
                       </div>
@@ -258,7 +264,7 @@ export default function HowItWorks() {
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                         <Image
                           src={config.image}
-                          alt={`${key} workflow`}
+                          alt={`${displayLabel} workflow`}
                           width={600}
                           height={400}
                           className="w-full object-cover"
@@ -366,7 +372,8 @@ export default function HowItWorks() {
                   </AnimatePresence>
                 </motion.div>
               </TabsContent>
-            ))}
+            );
+            })}
           </Tabs>
         </div>
       </section>

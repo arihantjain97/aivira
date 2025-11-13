@@ -38,53 +38,53 @@ export default function HowItWorksTeaser() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-          {Object.entries(personas).map(([key, val]) => (
-            <Link
-              key={key}
-              href={`/how-it-works?role=${key}`}
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200 block"
-            >
-              {/* Icon Header */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className={`p-3 rounded-xl ${personaConfig[key as keyof typeof personaConfig].color} text-white group-hover:scale-110 transition-transform duration-300`}>
-                  {(() => {
-                    const IconComponent = personaConfig[key as keyof typeof personaConfig].icon;
-                    return <IconComponent className="w-6 h-6" />;
-                  })()}
+          {Object.entries(personas).map(([key, val]) => {
+            const displayName = val.name ?? key;
+            return (
+              <Link
+                key={key}
+                href={`/how-it-works?role=${key}`}
+                className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200 block"
+              >
+                {/* Icon Header */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className={`p-3 rounded-xl ${personaConfig[key as keyof typeof personaConfig].color} text-white group-hover:scale-110 transition-transform duration-300`}>
+                    {(() => {
+                      const IconComponent = personaConfig[key as keyof typeof personaConfig].icon;
+                      return <IconComponent className="w-6 h-6" />;
+                    })()}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">{displayName}</h3>
+                    <div className={`h-1 w-12 bg-gradient-to-r ${personaConfig[key as keyof typeof personaConfig].gradient} rounded-full mt-1`} />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">{key}</h3>
-                  <div className={`h-1 w-12 bg-gradient-to-r ${personaConfig[key as keyof typeof personaConfig].gradient} rounded-full mt-1`} />
+                
+                {/* Hero Text */}
+                <p className="text-gray-700 font-medium mb-6 leading-relaxed">
+                  {val.hero}
+                </p>
+                
+                {/* Feature List */}
+                <ul className="space-y-3 mb-8">
+                  {val.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-3">
+                      <div className={`w-2 h-2 rounded-full ${personaConfig[key as keyof typeof personaConfig].color} mt-2 shrink-0`} />
+                      <span className="text-sm text-gray-600 leading-relaxed">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                {/* CTA Link */}
+                <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                  <span>{val.cta}</span>
                 </div>
-              </div>
-              
-              {/* Hero Text */}
-              <p className="text-gray-700 font-medium mb-6 leading-relaxed">
-                {val.hero}
-              </p>
-              
-              {/* Feature List */}
-              <ul className="space-y-3 mb-8">
-                {val.bullets.slice(0, 2).map((bullet, idx) => (
-                  <li key={bullet} className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full ${personaConfig[key as keyof typeof personaConfig].color} mt-2 shrink-0`} />
-                    <span className="text-sm text-gray-600 leading-relaxed">{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              {/* CTA Link */}
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3">
-                <span>See full workflow</span>
-                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              
-              {/* Subtle gradient overlay on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${personaConfig[key as keyof typeof personaConfig].gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300 pointer-events-none`} />
-            </Link>
-          ))}
+                
+                {/* Subtle gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${personaConfig[key as keyof typeof personaConfig].gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300 pointer-events-none`} />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

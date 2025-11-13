@@ -11,8 +11,8 @@ import { faqs } from '@/lib/constants';
 // Additional category-specific FAQs
 const grantFaqs = [
   {
-    question: 'What types of grants are available for Singapore SMEs?',
-    answer: 'Singapore offers numerous grants for SMEs including the Productivity Solutions Grant (PSG), Enterprise Development Grant (EDG), Market Readiness Assistance (MRA), and many more. These grants support various business needs from technology adoption to overseas expansion.'
+    question: 'What types of grants are available for Singapore businesses?',
+    answer: 'Singapore offers numerous grants for businesses including the Productivity Solutions Grant (PSG), Enterprise Development Grant (EDG), Market Readiness Assistance (MRA), and many more. These grants support various business needs from technology adoption to overseas expansion.'
   },
   {
     question: 'How do I know which grant is right for my business?',
@@ -112,7 +112,7 @@ export default function FAQs() {
         <div className="container mx-auto px-4">
           <SectionHeading 
             title="Grant-Specific Questions" 
-            subtitle="Learn more about Singapore SME grants and the application process."
+            subtitle="Learn more about Singapore business grants and the application process."
           />
           
           <div className="max-w-3xl mx-auto">

@@ -1,6 +1,6 @@
 # Aivira - AI-Powered Grant Automation Platform
 
-Aivira automates the entire grant process for Singapore SMEs. Match grants in minutes, auto-draft proposals, and track compliance in real-time.
+Aivira automates the entire grant process for Singapore businesses. Match grants in minutes, auto-draft proposals, and track compliance in real-time.
 
 ## Features
 

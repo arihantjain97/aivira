@@ -92,7 +92,7 @@ export default function SMEDashboard() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <Building2 className="w-8 h-8 text-primary" />
-              <h1 className="text-xl font-bold">Aivira SME Dashboard</h1>
+              <h1 className="text-xl font-bold">Aivira Business Dashboard</h1>
             </div>
             <Button
               onClick={handleSignOut}
@@ -124,7 +124,7 @@ export default function SMEDashboard() {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <User className="w-5 h-5" />
-                  <span>Welcome, {profile?.full_name || 'SME Owner'}!</span>
+                  <span>Welcome, {profile?.full_name || 'Business Owner'}!</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>

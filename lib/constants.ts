@@ -25,7 +25,7 @@ export const footerLinks = [
   {
     title: 'Solutions',
     links: [
-      { name: 'SME Grants', href: '/target-grants' },
+      { name: 'Business Grants', href: '/target-grants' },
       { name: 'Enterprise Development Grant', href: '/target-grants#edg' },
       { name: 'Productivity Solutions Grant', href: '/target-grants#psg' },
       { name: 'Market Readiness Assistance', href: '/target-grants#mra' },
@@ -35,24 +35,25 @@ export const footerLinks = [
 
 export const features = [
   {
-    title: 'AI-Powered Grant Matching',
-    description: 'Our smart algorithm matches your business to the perfect grants in less than 5 minutes, eliminating hours of research.',
-    icon: 'search',
+    title: 'Funding Barrier',
+    description: 'Capital Hard to Access',
+    longDescription:
+      'Fragmented, slow grant processes make it difficult for SMEs to secure essential funding when they need it most.',
+    icon: 'clock',
   },
   {
-    title: 'Automated Proposal Generation',
-    description: 'Let our AI draft custom grant proposals tailored to your business needs and government requirements.',
-    icon: 'file-text',
+    title: 'Growth Barrier',
+    description: 'Stagnant Expansion',
+    longDescription:
+      'SMEs lack clear insight into new opportunities, markets, and customer demand — stalling growth in competitive environments.',
+    icon: 'bar-chart-3',
   },
   {
-    title: 'Real-Time Compliance Tracking',
-    description: 'Stay on top of your grant obligations with automated deadline reminders and compliance checks.',
-    icon: 'check-circle',
-  },
-  {
-    title: '90% Cost Reduction',
-    description: 'Save thousands compared to traditional consultants while maintaining the same quality of service.',
-    icon: 'wallet',
+    title: 'Operational Barrier',
+    description: 'Low Productivity',
+    longDescription:
+      'Manual workflows, siloed tools, and unclear processes drain time and prevent teams from focusing on high-value work.',
+    icon: 'settings',
   },
 ];
 
@@ -105,7 +106,7 @@ export const targetGrants = [
   {
     id: 'mra',
     name: 'Market Readiness Assistance (MRA)',
-    description: 'Supports SMEs in their overseas expansion by helping to defray costs of internationalization.',
+    description: 'Supports businesses in their overseas expansion by helping to defray costs of internationalization.',
     maxFunding: 'Up to 70% of eligible costs, capped at S$100,000 per company per fiscal year',
     eligibility: [
       'Business entity registered/incorporated in Singapore',
@@ -132,7 +133,7 @@ export const pricingPlans = [
   {
     name: 'Growth',
     price: 199,
-    description: 'Ideal for growing SMEs seeking multiple grants',
+    description: 'Ideal for growing businesses seeking multiple grants',
     features: [
       'Access to 15+ grant programs',
       'AI-powered proposal generation',
@@ -167,7 +168,7 @@ export const faqs = [
   },
   {
     question: 'What types of grants does Aivira cover?',
-    answer: 'We currently cover all major Singapore SME grants including the Productivity Solutions Grant (PSG), Enterprise Development Grant (EDG), and Market Readiness Assistance (MRA). We continuously add new grants to our platform.'
+    answer: 'We currently cover all major Singapore business grants including the Productivity Solutions Grant (PSG), Enterprise Development Grant (EDG), and Market Readiness Assistance (MRA). We continuously add new grants to our platform.'
   },
   {
     question: 'How accurate is the AI in matching my business to grants?',

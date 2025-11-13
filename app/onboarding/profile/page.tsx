@@ -43,7 +43,7 @@ export default function OnboardingProfile() {
   // Map frontend role values to database enum values
   const mapRoleToDatabase = (frontendRole: string): string => {
     switch (frontendRole) {
-      case 'sme': return 'SME';
+      case 'sme': return 'Business';
       case 'consultant': return 'CONSULTANT';
       case 'vendor': return 'VENDOR';
       default: return frontendRole.toUpperCase();
@@ -111,7 +111,7 @@ export default function OnboardingProfile() {
 
   const getRoleLabel = (role: UserRole) => {
     switch (role) {
-      case 'sme': return 'SME Owner';
+      case 'sme': return 'Business Owner';
       case 'consultant': return 'Grant Consultant';
       case 'vendor': return 'Technology Vendor';
       default: return role;

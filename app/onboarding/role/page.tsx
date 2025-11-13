@@ -12,7 +12,7 @@ type UserRole = 'sme' | 'consultant' | 'vendor';
 const roles: { value: UserRole; label: string; description: string; icon: React.ComponentType<any> }[] = [
   {
     value: 'sme',
-    label: 'SME Owner',
+    label: 'Business Owner',
     description: 'I own or work for a small to medium enterprise seeking grants',
     icon: Building2
   },

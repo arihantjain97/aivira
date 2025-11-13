@@ -19,7 +19,7 @@ export default function AuthPlaceholderCard() {
           defaultValue=""
         >
           <option value="">Select Persona</option>
-          <option value="SME">SME</option>
+          <option value="SME">Business</option>
           <option value="Consultant">Consultant</option>
           <option value="Vendor">Vendor</option>
         </select>

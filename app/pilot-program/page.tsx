@@ -105,7 +105,7 @@ export default function PilotProgram() {
               </p>
               <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-6 mb-8 shadow-md">
                 <h2 className="text-xl font-semibold text-foreground mb-2">
-                  Exclusive Access for SMEs, Vendors & Consultants
+                  Exclusive Access for Businesses, Vendors & Consultants
                 </h2>
                 <p className="text-muted-foreground">
                   Be among the first to experience AI-powered grant automation. Shape the future of funding access in Singapore.

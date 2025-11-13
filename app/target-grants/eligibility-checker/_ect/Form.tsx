@@ -883,7 +883,7 @@ const WelcomeStep: React.FC<{ nextStep: () => void }> = ({ nextStep }) => (
         </span>
       </h1>
       <p className="text-base sm:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4">
-        Discover your Singapore SME grant eligibility in under 5 minutes. Our AI-powered assessment analyzes your project against official EnterpriseSG criteria.
+        Discover your Singapore business grant eligibility in under 5 minutes. Our AI-powered assessment analyzes your project against official EnterpriseSG criteria.
       </p>
     </div>
     <button 

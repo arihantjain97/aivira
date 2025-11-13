@@ -19,7 +19,7 @@ export function Footer() {
               <span className="font-bold text-xl">Aivira</span>
             </Link>
             <p className="text-muted-foreground mb-4">
-              AI-powered grant automation for Singapore SMEs. Simplifying access to government funding.
+              AI-powered grant automation for Singapore businesses. Simplifying access to government funding.
             </p>
             <div className="space-y-2">
               <div className="flex items-center">

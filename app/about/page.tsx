@@ -30,7 +30,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xl text-muted-foreground"
             >
-              We're on a mission to democratize access to government funding for Singapore SMEs through AI-powered automation.
+              We're on a mission to democratize access to government funding for Singapore businesses through AI-powered automation.
             </motion.p>
           </div>
         </div>
@@ -50,16 +50,16 @@ export default function About() {
               
               <div className="space-y-6 text-muted-foreground">
                 <p>
-                  Aivira was founded in May 2025 by Romil Jain and Medha Jain to transform how Singapore SMEs access government funding.
+                  Aivira was founded in May 2025 by Romil Jain and Medha Jain to transform how Singapore businesses access government funding.
                 </p>
                 <p>
-                  Romil, a 20+ year veteran in IT and transformation programs, saw the need for faster, more intelligent systems to support complex compliance and reporting. Medha brought deep experience from frontline roles at Citi and UOB, where she saw firsthand how underserved SMEs were in the funding process.
+                  Romil, a 20+ year veteran in IT and transformation programs, saw the need for faster, more intelligent systems to support complex compliance and reporting. Medha brought deep experience from frontline roles at Citi and UOB, where she saw firsthand how underserved businesses were in the funding process.
                 </p>
                 <p>
                   Together, they set out to build an AI-driven platform that bridges the gap between opportunity and access — automating eligibility checks, proposal generation, and compliance tracking.
                 </p>
                 <p className="font-medium">
-                  Their mission is to unlock SGD 500M in grants for 10,000 Singapore SMEs by 2028, fueling innovation, growth, and equitable access to government support.
+                  Their mission is to unlock SGD 500M in grants for 10,000 Singapore businesses by 2028, fueling innovation, growth, and equitable access to government support.
                 </p>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function About() {
             <div className="mt-12 bg-card p-6 rounded-lg shadow-sm">
               <h3 className="text-xl font-bold mb-4">How Our AI Works</h3>
               <p className="text-lg text-muted-foreground mb-6">
-                Our AI-powered platform is designed to generate customized proposals that meet government requirements while highlighting your business's unique strengths. We're building the most comprehensive grant automation solution for Singapore SMEs.
+                Our AI-powered platform is designed to generate customized proposals that meet government requirements while highlighting your business's unique strengths. We're building the most comprehensive grant automation solution for Singapore businesses.
               </p>
               
               <div className="space-y-4">
@@ -286,7 +286,7 @@ export default function About() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Us on Our Mission</h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
-            Help us democratize access to government funding for Singapore SMEs. Join our pilot program today.
+            Help us democratize access to government funding for Singapore businesses. Join our pilot program today.
           </p>
           <Button 
             size="lg" 

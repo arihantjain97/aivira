@@ -84,7 +84,7 @@ export function buildEnrichmentPrompt(formData: FormData, grantType: string): st
   const grantContext = getGrantContext(grantType);
   
   return `
-    You are a Singapore ${grantType} expert. Based on this SME's project data, provide 3 specific, actionable implementation solutions that can be funded through ${grantType} grants.
+    You are a Singapore ${grantType} expert. Based on this business's project data, provide 3 specific, actionable implementation solutions that can be funded through ${grantType} grants.
     
     Form Data:
     - Primary Goal: ${formData.primaryGoal}

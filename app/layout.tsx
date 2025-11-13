@@ -7,11 +7,11 @@ import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://aivira.sg'),
-  title: 'Aivira | AI-Powered Grant Automation for SMEs',
-  description: 'Aivira automates grant matching, drafting, and compliance for Singapore SMEs. Fast, simple, and affordable.',
+  title: 'Aivira | AI-Powered Grant Automation for Businesses',
+  description: 'Aivira automates grant matching, drafting, and compliance for Singapore businesses. Fast, simple, and affordable.',
   openGraph: {
-    title: 'Aivira | AI-Powered Grant Automation for SMEs',
-    description: 'Aivira automates grant matching, drafting, and compliance for Singapore SMEs. Fast, simple, and affordable.',
+    title: 'Aivira | AI-Powered Grant Automation for Businesses',
+    description: 'Aivira automates grant matching, drafting, and compliance for Singapore businesses. Fast, simple, and affordable.',
     url: 'https://aivira.sg',
     siteName: 'Aivira',
     images: [
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aivira | AI-Powered Grant Automation for SMEs',
-    description: 'Aivira automates grant matching, drafting, and compliance for Singapore SMEs. Fast, simple, and affordable.',
+    title: 'Aivira | AI-Powered Grant Automation for Businesses',
+    description: 'Aivira automates grant matching, drafting, and compliance for Singapore businesses. Fast, simple, and affordable.',
     images: ['/og-image.png'],
   },
   icons: {

@@ -36,8 +36,29 @@ export default function TargetGrants() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xl text-muted-foreground"
             >
-              Aivira helps Singapore SMEs access a wide range of government grants. Learn about the key grants and see if your business qualifies.
+              Aivira helps Singapore businesses access a wide range of government grants. Learn about the key grants and see if your business qualifies.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-10 flex flex-col items-center gap-4"
+            >
+              <p className="text-muted-foreground">
+                Aivira continuously updates its database with the latest grant programs.
+              </p>
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                onClick={handleEligibilityCheck}
+              >
+                🚀 Check Your Eligibility Now
+              </Button>
+              <p className="text-sm text-muted-foreground">
+                Get instant results in under 2 minutes!
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -46,7 +67,7 @@ export default function TargetGrants() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <SectionHeading 
-            title="Key Singapore SME Grants" 
+            title="Key Singapore Business Grants" 
             subtitle="Our platform currently covers these major grant programs, with more being added regularly."
           />
           
@@ -64,21 +85,7 @@ export default function TargetGrants() {
             ))}
           </div>
           
-          <div className="mt-12 text-center">
-            <p className="text-muted-foreground mb-6">
-              Aivira continuously updates its database with the latest grant programs.
-            </p>
-            <Button 
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              onClick={handleEligibilityCheck}
-            >
-              🚀 Check Your Eligibility Now
-            </Button>
-            <p className="text-sm text-muted-foreground mt-3">
-              Get instant results in under 2 minutes!
-            </p>
-          </div>
+          
         </div>
       </section>
 
