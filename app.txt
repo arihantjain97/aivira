@@ -1,0 +1,323 @@
+import React, { useState, useMemo } from 'react';
+import { ArrowRight, ArrowLeft, Mic, Loader2, CheckCircle, FileText, Building, BarChart2, Globe, HelpCircle, Users, Edit, Download, Lightbulb } from 'lucide-react';
+
+// --- Main Application Component ---
+export default function App() {
+    const [currentStep, setCurrentStep] = useState(1);
+    const totalSteps = 5;
+    const [formData, setFormData] = useState({});
+    const [isListening, setIsListening] = useState(false);
+    const [formState, setFormState] = useState('filling'); // 'filling', 'generating', 'report'
+
+    const handleNext = () => {
+        if (currentStep === totalSteps) {
+            setFormState('generating');
+            setTimeout(() => {
+                setFormState('report');
+            }, 3000);
+        } else {
+            setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+        }
+    };
+    const handleBack = () => setCurrentStep(prev => Math.max(prev - 1, 1));
+
+    const updateFormData = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
+    
+    // Simulate voice input
+    const handleVoiceInput = (field, mockValue) => {
+        setIsListening(true);
+        setTimeout(() => {
+            updateFormData(field, mockValue);
+            setIsListening(false);
+        }, 2000);
+    };
+
+    const renderStep = () => {
+        switch (currentStep) {
+            case 1: return <Step1 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
+            case 2: return <Step2 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
+            case 3: return <Step3 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
+            case 4: return <Step4 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
+            case 5: return <Step5 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
+            default: return <Step1 data={formData} update={updateFormData} />;
+        }
+    };
+    
+    const isStepComplete = useMemo(() => {
+        switch (currentStep) {
+            case 1: return formData.businessArea && formData.projectSummary;
+            case 2: return formData.uen && formData.businessName && formData.ssic && formData.industry;
+            case 3: return formData.shareholding && formData.revenue && formData.employees && formData.operatingMonths;
+            case 4: return formData.expandOverseas === 'No' || (formData.expandOverseas === 'Yes' && formData.targetMarket && formData.prevMRA);
+            case 5: return formData.fundingCriticality && formData.proposalReady;
+            default: return false;
+        }
+    }, [formData, currentStep]);
+
+    if (formState === 'generating') {
+        return <GeneratingReport />;
+    }
+    
+    if (formState === 'report') {
+        return <ReportScreen formData={formData} />;
+    }
+
+    return (
+        <div className="bg-gray-100 min-h-screen font-sans flex flex-col items-center justify-center p-4">
+            <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-200">
+                <Header currentStep={currentStep} totalSteps={totalSteps} />
+                <main className="mt-8 min-h-[300px]">
+                    {renderStep()}
+                </main>
+                <Footer 
+                    currentStep={currentStep} 
+                    totalSteps={totalSteps} 
+                    handleBack={handleBack} 
+                    handleNext={handleNext} 
+                    isStepComplete={isStepComplete}
+                />
+            </div>
+            {isListening && <div className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-3"><Loader2 className="animate-spin" /> Listening...</div>}
+        </div>
+    );
+}
+
+// --- Sub-Components ---
+
+const Header = ({ currentStep, totalSteps }) => {
+    const steps = [
+        { name: "Project", icon: FileText },
+        { name: "Business", icon: Building },
+        { name: "Eligibility", icon: CheckCircle },
+        { name: "Expansion", icon: Globe },
+        { name: "Readiness", icon: BarChart2 }
+    ];
+    return (
+        <div>
+            <div className="text-center">
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Grant DNA™ Diagnostic Engine</h1>
+                <p className="text-gray-500 mt-2">Answer a few questions to get your free grant eligibility report.</p>
+            </div>
+            <div className="mt-8">
+                <div className="flex items-center justify-between max-w-full mx-auto">
+                    {steps.map((step, index) => {
+                        const stepNumber = index + 1;
+                        const isCompleted = currentStep > stepNumber;
+                        const isActive = currentStep === stepNumber;
+                        const Icon = step.icon;
+                        return (
+                            <React.Fragment key={step.name}>
+                                <div className="flex flex-col items-center text-center w-24">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isCompleted ? 'bg-blue-600 text-white' : isActive ? 'bg-blue-200 border-2 border-blue-600 text-blue-700' : 'bg-gray-200 text-gray-500'}`}>
+                                        {isCompleted ? <CheckCircle size={20} /> : <Icon size={20} />}
+                                    </div>
+                                    <p className={`mt-2 text-xs md:text-sm ${isActive || isCompleted ? 'font-semibold text-blue-700' : 'text-gray-500'}`}>{step.name}</p>
+                                </div>
+                                {index < steps.length - 1 && <div className={`flex-1 h-1 rounded-full ${isCompleted ? 'bg-blue-600' : 'bg-gray-200'}`}></div>}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Footer = ({ currentStep, totalSteps, handleBack, handleNext, isStepComplete }) => (
+    <footer className="mt-10 pt-6 border-t border-gray-200 flex items-center justify-between">
+        <button onClick={handleBack} disabled={currentStep === 1} className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-50"><ArrowLeft size={16} /> Back</button>
+        <button onClick={handleNext} disabled={!isStepComplete} className="flex items-center gap-2 bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed">
+            {currentStep === totalSteps ? 'Generate Report' : 'Next Step'} <ArrowRight size={18} />
+        </button>
+    </footer>
+);
+
+const GeneratingReport = () => (
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center text-center p-4">
+        <Loader2 size={60} className="text-blue-500 animate-spin" />
+        <h2 className="text-2xl font-bold text-gray-800 mt-6">Analyzing Your Profile...</h2>
+        <p className="text-gray-600 mt-2">Our AI is generating your personalized grant eligibility report.</p>
+    </div>
+);
+
+const ReportScreen = ({ formData }) => {
+    const proposalNeeded = formData.proposalReady === 'No' || formData.proposalReady === 'In Progress';
+
+    return (
+        <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+            <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-200">
+                <div className="text-center">
+                    <CheckCircle size={60} className="text-green-500 mx-auto" />
+                    <h2 className="text-3xl font-bold text-gray-800 mt-6">Your Eligibility Report is Ready!</h2>
+                    <p className="text-gray-500 mt-1">Generated by Grant DNA™ AI Engine</p>
+                </div>
+                
+                <div className="mt-8 text-left bg-blue-50 border border-blue-200 rounded-lg p-6 space-y-4">
+                    <div className="flex justify-between items-center">
+                        <span className="font-medium text-gray-600">Top Grant Match:</span>
+                        <span className="font-bold text-xl text-blue-700">Productivity Solutions Grant (PSG)</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                        <span className="font-medium text-gray-600">AI Confidence Score:</span>
+                        <span className="font-bold text-xl text-blue-700">92%</span>
+                    </div>
+                    <div>
+                        <span className="font-medium text-gray-600">Rationale:</span>
+                        <p className="text-sm text-gray-700 mt-1">Your project to **{formData.businessArea || 'adopt IT solutions'}** aligns perfectly with the objectives of the PSG grant.</p>
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-blue-100 text-center">
+                         <button className="flex items-center justify-center mx-auto gap-2 text-sm text-blue-600 font-medium border border-blue-200 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <Download size={16} /> Download Full Report (PDF)
+                        </button>
+                    </div>
+                </div>
+
+                <div className="mt-8 text-left">
+                    <h3 className="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2"><Lightbulb size={20} className="text-yellow-500"/> Proactive AI Suggestions</h3>
+                    <div className="space-y-3">
+                        <div className="p-4 bg-gray-50 rounded-lg border">
+                            <h4 className="font-semibold text-gray-800">Secondary Grant Opportunity</h4>
+                            <p className="text-sm text-gray-600 mt-1">Your project may also qualify for the **Enterprise Development Grant (EDG)** for deeper capability building. We recommend exploring this for Phase 2.</p>
+                        </div>
+                        {formData.expandOverseas === 'Yes' && (
+                            <div className="p-4 bg-gray-50 rounded-lg border">
+                                <h4 className="font-semibold text-gray-800">FTA Optimization</h4>
+                                <p className="text-sm text-gray-600 mt-1">Since you are expanding to **{formData.targetMarket}**, sourcing your IT solutions from a vendor in that country could unlock cost savings under the **Free Trade Agreement (FTA)**.</p>
+                            </div>
+                        )}
+                         <div className="p-4 bg-gray-50 rounded-lg border">
+                            <h4 className="font-semibold text-gray-800">Financing Recommendation</h4>
+                            <p className="text-sm text-gray-600 mt-1">For large projects, consider a **SME Working Capital Loan** to manage cash flow during the grant reimbursement period. We can connect you with financial partners.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-10">
+                    <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">What's Next?</h3>
+                    <div className="space-y-4">
+                        {proposalNeeded && (
+                             <button className="w-full flex items-center justify-center gap-3 bg-blue-600 text-white font-bold py-4 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+                                <Edit size={20} /> Build Your Proposal with AI (Recommended)
+                            </button>
+                        )}
+                        <button className={`w-full flex items-center justify-center gap-3 font-semibold py-4 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105 ${proposalNeeded ? 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50' : 'bg-blue-600 text-white hover:bg-blue-700'}`}>
+                            <Users size={20} /> Find a Vetted Partner Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+// --- Step Components ---
+
+const Step1 = ({ data, update, onVoice }) => {
+    const businessAreas = ["Adopt IT solutions", "Improve financial management", "Improve operational processes", "Hire, train, and upskill employees", "Develop brand & improve awareness", "Bring my business overseas"];
+    return (
+        <div className="space-y-8 animate-fade-in">
+            <div>
+                <label className="text-lg font-semibold text-gray-700">Which business area do you need grant assistance for?</label>
+                <div className="flex flex-wrap gap-3 mt-4">
+                    {businessAreas.map(area => <OptionButton key={area} text={area} selected={data.businessArea === area} onClick={() => update('businessArea', area)} />)}
+                </div>
+            </div>
+            <div>
+                <label htmlFor="projectSummary" className="text-lg font-semibold text-gray-700">Please provide a brief summary of your project.</label>
+                <div className="relative mt-3">
+                    <textarea id="projectSummary" rows="4" value={data.projectSummary || ''} onChange={(e) => update('projectSummary', e.target.value)} className="w-full p-3 pr-12 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., We want to implement a new CRM system to manage our customer relationships and improve sales..."></textarea>
+                    <button onClick={() => onVoice('projectSummary', 'We want to implement a new CRM system to manage our customer relationships and improve sales.')} className="absolute top-3 right-3 text-gray-400 hover:text-blue-600"><Mic size={20} /></button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Step2 = ({ data, update, onVoice }) => (
+    <div className="space-y-6 animate-fade-in">
+        <InputField label="What is your Business Name?" name="businessName" value={data.businessName || ''} onChange={update} onVoice={onVoice} mockVoice="The Gourmet Cafe Pte. Ltd." />
+        <InputField label="Specify UEN:" name="uen" value={data.uen || ''} onChange={update} onVoice={onVoice} mockVoice="202412345A" />
+        <InputField label="Provide SSIC Code:" name="ssic" value={data.ssic || ''} onChange={update} onVoice={onVoice} mockVoice="56111" />
+        <InputField label="What is your organization's primary industry?" name="industry" value={data.industry || ''} onChange={update} onVoice={onVoice} mockVoice="Retail / F&B" />
+    </div>
+);
+
+const Step3 = ({ data, update, onVoice }) => (
+     <div className="space-y-6 animate-fade-in">
+        <InputField label="Specify Local Shareholding (%)?" type="number" name="shareholding" value={data.shareholding || ''} onChange={update} onVoice={onVoice} mockVoice="100" />
+        <InputField label="What is your Annual Revenue (SGD)?" type="number" name="revenue" value={data.revenue || ''} onChange={update} onVoice={onVoice} mockVoice="1200000" />
+        <InputField label="What is your Employee Count?" type="number" name="employees" value={data.employees || ''} onChange={update} onVoice={onVoice} mockVoice="15" />
+        <InputField label="How many months has your business been operating?" type="number" name="operatingMonths" value={data.operatingMonths || ''} onChange={update} onVoice={onVoice} mockVoice="36" />
+    </div>
+);
+
+const Step4 = ({ data, update, onVoice }) => (
+    <div className="space-y-8 animate-fade-in">
+        <div>
+            <label className="text-lg font-semibold text-gray-700">Do you want to expand overseas?</label>
+            <div className="flex gap-4 mt-3">
+                <OptionButton text="Yes" selected={data.expandOverseas === 'Yes'} onClick={() => update('expandOverseas', 'Yes')} />
+                <OptionButton text="No" selected={data.expandOverseas === 'No'} onClick={() => update('expandOverseas', 'No')} />
+            </div>
+        </div>
+        {data.expandOverseas === 'Yes' && (
+            <div className="space-y-6 border-t pt-6 animate-fade-in">
+                <InputField label="Which overseas market are you planning to expand to?" name="targetMarket" value={data.targetMarket || ''} onChange={update} onVoice={onVoice} mockVoice="Malaysia" />
+                <div>
+                    <label className="block text-md font-semibold text-gray-700 mb-3">Have you previously received an MRA grant for THIS specific market?</label>
+                    <div className="flex gap-4">
+                        <OptionButton text="Yes" selected={data.prevMRA === 'Yes'} onClick={() => update('prevMRA', 'Yes')} />
+                        <OptionButton text="No" selected={data.prevMRA === 'No'} onClick={() => update('prevMRA', 'No')} />
+                    </div>
+                </div>
+            </div>
+        )}
+    </div>
+);
+
+const Step5 = ({ data, update, onVoice }) => (
+    <div className="space-y-8 animate-fade-in">
+        <div>
+            <label className="text-lg font-semibold text-gray-700">On a scale of 1 to 5, how critical is securing grant funding for this project?</label>
+            <div className="flex justify-between mt-4 max-w-sm mx-auto">
+                {[1,2,3,4,5].map(num => <ScaleButton key={num} num={num} selected={data.fundingCriticality === num} onClick={() => update('fundingCriticality', num)} />)}
+            </div>
+        </div>
+        <div>
+            <label className="text-lg font-semibold text-gray-700">Do you have a detailed project proposal prepared?</label>
+             <div className="flex gap-4 mt-3">
+                <OptionButton text="Yes" selected={data.proposalReady === 'Yes'} onClick={() => update('proposalReady', 'Yes')} />
+                <OptionButton text="No" selected={data.proposalReady === 'No'} onClick={() => update('proposalReady', 'No')} />
+                <OptionButton text="In Progress" selected={data.proposalReady === 'In Progress'} onClick={() => update('proposalReady', 'In Progress')} />
+            </div>
+        </div>
+    </div>
+);
+
+
+// --- Helper UI Components ---
+
+const OptionButton = ({ text, selected, onClick }) => (
+    <button onClick={onClick} className={`px-4 py-2 text-sm font-medium rounded-full border transition-colors ${selected ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'}`}>
+        {text}
+    </button>
+);
+
+const ScaleButton = ({ num, selected, onClick }) => (
+     <button onClick={onClick} className={`w-12 h-12 flex items-center justify-center text-lg font-bold rounded-full border-2 transition-all ${selected ? 'bg-blue-600 text-white border-blue-600 scale-110' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'}`}>
+        {num}
+    </button>
+);
+
+const InputField = ({ label, name, value, onChange, onVoice, mockVoice, type = "text" }) => (
+    <div>
+        <label htmlFor={name} className="text-md font-semibold text-gray-700">{label}</label>
+        <div className="relative mt-2">
+            <input id={name} name={name} type={type} value={value} onChange={(e) => onChange(name, e.target.value)} className="w-full p-3 pr-12 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+            <button onClick={() => onVoice(name, mockVoice)} className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-400 hover:text-blue-600"><Mic size={20} /></button>
+        </div>
+    </div>
+);
