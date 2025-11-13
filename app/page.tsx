@@ -91,9 +91,9 @@ const engineOutputs = [
   {
     title: 'Grant Engine',
     items: [
-      { label: 'AI Grant Eligibility & Funding Insights', icon: Search },
-      { label: 'ROI-Driven Project Planning', icon: Target },
-      { label: 'Compliant, Evidence-Backed Document Generation', icon: FileText },
+      { label: 'Instant Grant Eligibility', icon: Search },
+      { label: 'ROI-Driven Project Builder', icon: Target },
+      { label: 'Compliant Document Generation', icon: FileText },
     ],
     icon: Rocket,
     accent: {
@@ -105,7 +105,11 @@ const engineOutputs = [
   },
   {
     title: 'Lead Engine',
-    items: [{ label: 'Trusted Consultant & Vendor Matching', icon: Users }],
+    items: [
+      { label: 'Trusted Consultant & Vendor Matching', icon: Users },
+      { label: 'Lead Qualification Logic', icon: BadgeCheck },
+      { label: 'Collaboration Workspace', icon: Layers },
+    ],
     icon: Users,
     accent: {
       background: 'bg-gradient-to-br from-slate-900/90 to-slate-700/80 dark:from-slate-100/90 dark:to-slate-200/80',
@@ -221,16 +225,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Intelligence Section */}
+      {/* Combined Benefits & Intelligence Section */}
       <section className="py-24 bg-gradient-to-b from-background via-background to-muted/50 border-t border-border/60">
         <div className="container mx-auto px-4">
           <SectionHeading 
-            title="The Intelligence Behind Aivira" 
-            subtitle="Aivira is more than automation — it is a structured reasoning engine built specifically for business workflows, funding logic, compliance, and business growth."
+            title="Why Choose Aivira?" 
+            subtitle="Aivira simplifies funding, clarifies your project needs, connects you with best-fit experts, and generates compliant, credible documents — all with the speed and precision SMEs need."
           />
 
           <div className="mt-16 flex flex-col items-center gap-16">
-            <div className="w-full max-w-6xl">
+            <div className="w-full max-w-6xl text-center mt-12">
+              <p className="text-[11px] md:text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                THE INTELLIGENCE BEHIND AIVIRA
+              </p>
+            </div>
+
+            <div className="w-full max-w-6xl mt-6">
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
                 {coreLayers.map(({ title, badge, description, icon: Icon, accent }) => (
                   <div
@@ -268,7 +278,13 @@ export default function Home() {
                 <span className="hidden md:block h-px w-32 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2 w-full">
+              <div className="mt-6 mb-6 text-center">
+                <p className="text-[11px] md:text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                  The Aivira Product Ecosystem
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2 w-full mt-6">
                 {engineOutputs.map(({ title, items, icon: Icon, accent }) => (
                   <div
                     key={title}
@@ -289,7 +305,7 @@ export default function Home() {
                           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white">
                             <ItemIcon className="h-3.5 w-3.5" />
                           </span>
-                          <span className="flex-1 text-center">{label}</span>
+                          <span className="flex-1 text-center truncate">{label}</span>
                         </span>
                       ))}
                     </div>
